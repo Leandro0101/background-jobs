@@ -1,4 +1,4 @@
-import Mail from '../lib/Mail'
+import Queue from '../lib/Queue'
 
 export default {
   async create(request, response) {
@@ -8,12 +8,7 @@ export default {
       name, email, password
     }
 
-    Mail.sendMail({
-      from: 'Leandro Lima <leandrovieira3306@gmai.com>',
-      to: `${name} <${email}>`,
-      subject: 'Cadastro de usuário',
-      html: `Olá, ${name}, bem vindo ao nosso sistema de envio de email`
-    })
+    await Queue.add('RegistrationMail', { user })
 
     return response.json(user)
   }
