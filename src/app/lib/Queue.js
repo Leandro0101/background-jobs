@@ -24,7 +24,6 @@ export default {
         console.log('job failed', queue.key, job.data)
         console.log(err)
       })
-      
     })
   }
 }
